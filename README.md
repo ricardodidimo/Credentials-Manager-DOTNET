@@ -11,6 +11,9 @@ This is a demo API project built with **.NET 8** for a **Credentials Management*
 - **Docker**: Containerized application for consistent deployment across environments.
 - **PostgreSQL with Entity Framework Core**: A relational database for storing credentials and other application data.
 
+## Accessing the hosted API
+You can run the dockerized API locally or access the hosted version at [this azure deployment](https://passwordvault-g5egh7h6f6eububn.brazilsouth-01.azurewebsites.net/index.html)
+
 ## How to run
 
 Before running the project, make sure you have the following installed:
@@ -26,16 +29,16 @@ git clone https://github.com/ricardodidimo/Credentials-Manager-DOTNET.git
 ```
 
 ### Set Up the Database
+1. Create a *'.env'* file in the root directory that mirrors the keys in *'.env.examle'*, attributing your own values to the variables, especially the *'POSTGRES_CONNECTION'* variables that will point to a external postgres client. For this demo i'm
+using a free hosted alternative at [supabase](https://supabase.com/). The remaning keys will all take random values of your preference.
 
-1. Using **Docker**, you can quickly setup all the containers using Docker Compose.
+2. Using **Docker**, you can quickly setup the container using Docker Compose.
 
-   In the project root, you’ll find a `docker-compose.yml` file that defines the PostgreSQL service 'postgres_db' and the API as 'webapi'. Run the following command to start both containers:
+   In the project root, you’ll find a `docker-compose.yml`. Run the following command to start the app's container:
 
    ```bash
    docker-compose up -d --build
    ```
-
-   The default connection string is already configured in the project with the *'.env'* file, pointing to the database running inside the Docker container.
 
    *And thats it!* You will have the demo app running at: [localhost:8080](http://localhost:8080) in your browser. The OpenAPI/Swagger UI will serve as documentation and allow you to interact with the proposed API.
 
