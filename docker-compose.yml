@@ -15,5 +15,5 @@ services:
       - jwt_key=${JWT_KEY}
       - POSTGRES_CONNECTION=${POSTGRES_CONNECTION}
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "80:80"
+      - "403:403"

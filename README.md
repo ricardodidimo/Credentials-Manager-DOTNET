@@ -40,7 +40,7 @@ using a free hosted alternative at [supabase](https://supabase.com/). The remani
    docker-compose up -d --build
    ```
 
-   *And thats it!* You will have the demo app running at: [localhost:8080](http://localhost:8080) in your browser. The OpenAPI/Swagger UI will serve as documentation and allow you to interact with the proposed API.
+   *And thats it!* You will have the demo app running at: [localhost:80](http://localhost:80) in your browser. The OpenAPI/Swagger UI will serve as documentation and allow you to interact with the proposed API.
 
 ### Proposed flow
   - Once you have the API running, you should first create a user in the *"CreateUserEndpoint"* section;

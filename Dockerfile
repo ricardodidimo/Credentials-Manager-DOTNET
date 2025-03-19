@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+EXPOSE 403
 
 ARG BUILD_CONFIGURATION=Release
 
@@ -19,5 +19,6 @@ RUN dotnet publish "webapi.csproj" -c ${BUILD_CONFIGURATION} -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:80
 
 ENTRYPOINT ["sh", "-c", "dotnet webapi.dll"]
