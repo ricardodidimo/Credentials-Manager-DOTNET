@@ -12,7 +12,7 @@ This is a demo API project built with **.NET 8** for a **Credentials Management*
 - **PostgreSQL with Entity Framework Core**: A relational database for storing credentials and other application data.
 
 ## Accessing the hosted API
-You can run the dockerized API locally or access the hosted version at [this azure deployment](https://passwordvault-g5egh7h6f6eububn.brazilsouth-01.azurewebsites.net/index.html)
+You can run the dockerized API locally or access the hosted version at [this azure deployment](https://vaultapp-brazil-south12939.azurewebsites.net/index.html)
 
 ## How to run
 
