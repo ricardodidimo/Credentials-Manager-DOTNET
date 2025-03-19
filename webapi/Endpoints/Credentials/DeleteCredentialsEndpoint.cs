@@ -10,7 +10,7 @@ namespace webapi.Endpoints.Credentials
     public class DeleteCredentialsEndpoint
     {
         /// <summary>
-        /// Deletes specific credentials
+        /// Deletes specific credentials (!)
         /// </summary>
         /// 
         /// <param name="id">The unique identifier of the credentials</param>
