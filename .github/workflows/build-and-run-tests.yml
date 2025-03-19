@@ -1,0 +1,18 @@
+name: Checking build and Running test cases
+on: push
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup .NET environment
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "8.0.403"
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Run tests
+        run: dotnet test
