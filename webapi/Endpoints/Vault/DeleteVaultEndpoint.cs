@@ -10,7 +10,7 @@ namespace webapi.Endpoints.Vault
     public class DeleteVaultEndpoint
     {
         /// <summary>
-        /// Deletes a specific vault container
+        /// Deletes a specific vault container.
         /// </summary>
         /// 
         /// <remarks>

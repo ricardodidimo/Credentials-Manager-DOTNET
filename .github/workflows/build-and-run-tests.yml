@@ -1,5 +1,10 @@
-name: Checking build and Running test cases
-on: push
+name: Build. Test. Deploy.
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -16,3 +21,44 @@ jobs:
 
       - name: Run tests
         run: dotnet test
+  build-image-and-deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    environment: azure_deployment
+    env:
+      ACR_NAME: ${{ vars.ACR_NAME }}
+      IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+      APP_SERVICE_NAME: ${{ vars.APP_SERVICE_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Debug environment variables
+        run: |
+          echo "ACR_NAME: ${{ env.ACR_NAME }}"
+          echo "IMAGE_NAME: ${{ env.IMAGE_NAME }}"
+          echo "APP_SERVICE_NAME: ${{ env.APP_SERVICE_NAME }}"
+
+      - name: Build and push Docker image
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{env.ACR_NAME}}.azurecr.io/${{env.IMAGE_NAME}}:latest .
+          docker push ${{env.ACR_NAME}}.azurecr.io/${{env.IMAGE_NAME}}:latest
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{env.APP_SERVICE_NAME}}
+          slot-name: production
+          images: ${{env.ACR_NAME}}.azurecr.io/${{env.IMAGE_NAME}}:latest
